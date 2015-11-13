@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('items', 'ItemsController@index');
 Route::post('items/add', 'ItemsController@store');
+Route::post('items/update', 'ItemsController@update');

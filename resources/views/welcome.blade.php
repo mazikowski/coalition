@@ -13,31 +13,41 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+        <!-- JavaScript for app -->
         <script src="js/app.js"></script>
     </head>
     <body>
         <div class="container">
             <h1>Coalition PHP Skill Test</h1>
-            <div class="row well">
-                {!! Form::open(['url' => '/', 'id' => 'itemForm']) !!}
-                <div class="form-group">
-                    {!! Form::label('product', 'Product Name') !!}
-                    {!! Form::text('product', null, ['class' => 'form-control']) !!}
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 well">
+                    {!! Form::open(['url' => '/', 'id' => 'itemForm']) !!}
+                    <div class="form-group">
+                        {!! Form::label('product', 'Product Name') !!}
+                        {!! Form::text('product', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('quantity', 'Quantity in Stock') !!}
+                        {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('price', 'Price per Item') !!}
+                        {!! Form::text('price', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div id="editButtons" style="display:none">
+                    {!! Form::hidden('datetime', null, ['id' => 'datetime']) !!}
+                    {!! Form::button('Update Item', ['type' => 'submit', 'class' => 'btn btn-primary', 'id' => 'btnUpdate']) !!}
+                    {!! Form::button('Cancel', ['type' => 'button', 'class' => 'btn btn-default', 'id' => 'btnCancel']) !!}
+                    </div>
+                    {!! Form::button('Add Item', ['type' => 'submit', 'class' => 'btn btn-success', 'id' => 'btnAdd']) !!}
+                    {!! Form::close() !!}
                 </div>
-                <div class="form-group">
-                    {!! Form::label('qty', 'Quantity in Stock') !!}
-                    {!! Form::text('qty', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="form-group">
-                    {!! Form::label('price', 'Price per Item') !!}
-                    {!! Form::text('price', null, ['class' => 'form-control']) !!}
-                </div>
-                {!! Form::button('Add Item', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
-                {!! Form::close() !!}
             </div>
-            <div class="row well">
-                <table class="table table-striped">
+            <div class="well">
+                <table class="table table-striped" id="itemsTable">
                     <thead>
                         <tr>
                             <th>Product Name</th>
@@ -52,8 +62,9 @@
                     </tbody>
                     <tfoot>
                     <tr>
+                        <td colspan="3"></td>
                         <td>Total Value Sum</td>
-                        <td id="value-sum"></td>
+                        <td id="valueSum">0</td>
                     </tr>
                     </tfoot>
                 </table>
